@@ -1,16 +1,27 @@
-# 🛡️ LVM on LUKS Installation Guide (UEFI)
+# 🛡️ LVM on LUKS Installation Guide 
 
 This guide outlines the steps for creating an encrypted Linux system using LUKS on top of LVM for a UEFI environment.
 
 ---
 
-## 1. 💽 Disk Partitioning (`gdisk` or `cgdisk`)
+## 1. 💽 Disk Partitioning 
 
 Target Disk: `/dev/sda`
 
+- **UEFI**
+
 | Partition | Size | Type Code | Purpose |
 | :--- | :--- | :--- | :--- |
-| **P1** | 5MB | `ef02` | **BIOS Boot** (for GRUB compatibility) |
+| **P1** | 500MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
+| **P2** | 1GB | `8300` | **Boot Partition** (Mount point: `/boot`) |
+| **P3** | Rest | `8309` | **LUKS/LVM Container** |
+
+
+- **Legacy BIOS/CSM**
+
+| Partition | Size | Type Code | Purpose |
+| :--- | :--- | :--- | :--- |
+| **P1** | 5MB | `ef02` | **BIOS Boot** (if you use GPT instead of MBR) |
 | **P2** | 500MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
 | **P3** | 1GB | `8300` | **Boot Partition** (Mount point: `/boot`) |
 | **P4** | Rest | `8309` | **LUKS/LVM Container** |
@@ -130,19 +141,30 @@ Target Disk: `/dev/sda`
     reboot
     ```
 
-# 🔑 LVM on LUKS with Keyfile Setup Guide (UEFI)
+# 🔑 LVM on LUKS with Keyfile Setup Guide 
 
 This process uses a keyfile stored securely within the initial RAM disk (`initrd.gz`) to automatically unlock the LUKS partition at boot.
 
 ---
 
-## 1. 💽 Disk Partitioning (`gdisk` or `cgdisk`)
+## 1. 💽 Disk Partitioning 
 
 Target Disk: `/dev/sda`
 
+- **UEFI**
+
 | Partition | Size | Type Code | Purpose |
 | :--- | :--- | :--- | :--- |
-| **P1** | 5MB | `ef02` | **BIOS Boot** (for GRUB compatibility) |
+| **P1** | 500MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
+| **P2** | 1GB | `8300` | **Boot Partition** (Mount point: `/boot`) |
+| **P3** | Rest | `8309` | **LUKS/LVM Container** |
+
+
+- **Legacy BIOS/CSM**
+
+| Partition | Size | Type Code | Purpose |
+| :--- | :--- | :--- | :--- |
+| **P1** | 5MB | `ef02` | **BIOS Boot** (if you use GPT instead of MBR) |
 | **P2** | 500MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
 | **P3** | 1GB | `8300` | **Boot Partition** (Mount point: `/boot`) |
 | **P4** | Rest | `8309` | **LUKS/LVM Container** |
