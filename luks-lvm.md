@@ -12,7 +12,7 @@ Target Disk: `/dev/sda`
 | :--- | :--- | :--- | :--- |
 | **P1** | 5MB | `ef02` | **BIOS Boot** (for GRUB compatibility) |
 | **P2** | 500MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
-| **P3** | 1GB | `8300` | **Linux /boot** (Mount point: `/boot`) |
+| **P3** | 1GB | `8300` | **Linux/boot** (Mount point: `/boot`) |
 | **P4** | Rest | `8309` | **LUKS/LVM Container** |
 
 ---
@@ -144,7 +144,7 @@ Target Disk: `/dev/sda`
 | :--- | :--- | :--- | :--- |
 | **P1** | 5MB | `ef02` | **BIOS Boot** (for GRUB compatibility) |
 | **P2** | 500MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
-| **P3** | 1GB | `8300` | **Linux /boot** (Mount point: `/boot`) |
+| **P3** | 1GB | `8300` | **Linux/boot** (Mount point: `/boot`) |
 | **P4** | Rest | `8309` | **LUKS/LVM Container** |
 
 ---
