@@ -223,7 +223,7 @@ Target Disk: `/dev/sda`
 
     cd /tmp/initrd-tree
     # Download the required patch (specific to this mkinitrd system)
-    wget https://raw.githubusercontent.com/lukazu25/cheat-sheet/assets/master/patch.diff
+    wget https://raw.githubusercontent.com/lukazu25/cheat-sheet/main/assets/patch.diff
 
     patch init < key_file_in_the_initrd_and_drive_unlocked_by_grub.diff
     mv /slackpv.keyfile ./ # Move the keyfile into the build directory
