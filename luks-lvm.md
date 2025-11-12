@@ -11,8 +11,9 @@ Target Disk: `/dev/sda`
 | Partition | Size | Type Code | Purpose |
 | :--- | :--- | :--- | :--- |
 | **P1** | 5MB | `ef02` | **BIOS Boot** (for GRUB compatibility) |
-| **P2** | 160MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
-| **P3** | Rest | `8309` | **LUKS/LVM Container** |
+| **P2** | 500MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
+| **P3** | 1GB | `8300` | **LInux /boot** (Mount point: `/boot`) |
+| **P4** | Rest | `8309` | **LUKS/LVM Container** |
 
 ---
 
@@ -49,7 +50,7 @@ Target Disk: `/dev/sda`
     # Swap LV (4GB)
     lvcreate -C y -L 4GB -n swap slack
     # Root LV (20GB)
-    lvcreate -C n -L 20GB -n root slack
+    lvcreate -C n -L 50GB -n root slack
     # Home LV (Remaining space)
     lvcreate -C n -l 100%FREE -n home slack
     ```
@@ -142,8 +143,9 @@ Target Disk: `/dev/sda`
 | Partition | Size | Type Code | Purpose |
 | :--- | :--- | :--- | :--- |
 | **P1** | 5MB | `ef02` | **BIOS Boot** (for GRUB compatibility) |
-| **P2** | 160MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
-| **P3** | Rest | `8309` | **LUKS/LVM Container** |
+| **P2** | 500MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
+| **P3** | 1GB | `8300` | **LInux /boot** (Mount point: `/boot`) |
+| **P4** | Rest | `8309` | **LUKS/LVM Container** |
 
 ---
 
@@ -179,8 +181,8 @@ Target Disk: `/dev/sda`
     ```bash
     # Swap LV (4GB)
     lvcreate -C y -L 4GB -n swap slack
-    # Root LV (20GB)
-    lvcreate -C n -L 20GB -n root slack
+    # Root LV (50GB)
+    lvcreate -C n -L 50GB -n root slack
     # Home LV (Remaining space)
     lvcreate -C n -l 100%FREE -n home slack
     ```
