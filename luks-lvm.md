@@ -1,6 +1,6 @@
 # 🛡️ LVM on LUKS Installation Guide 
 
-This guide outlines the steps for creating an encrypted Linux system using LUKS on top of LVM for a UEFI environment.
+This guide outlines the steps for creating an encrypted Linux system using LUKS on top of LVM for a UEFI and Legacy BIOS environments.
 
 ---
 
