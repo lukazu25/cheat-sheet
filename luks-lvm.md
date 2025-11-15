@@ -22,9 +22,8 @@ Target Disk: `/dev/sda`
 | Partition | Size | Type Code | Purpose |
 | :--- | :--- | :--- | :--- |
 | **P1** | 5MB | `ef02` | **BIOS Boot** (if you use GPT instead of MBR) |
-| **P2** | 500MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
-| **P3** | 1GB | `8300` | **Boot Partition** (Mount point: `/boot`) |
-| **P4** | Rest | `8309` | **LUKS/LVM Container** |
+| **P2** | 1GB | `8300` | **Boot Partition** (Mount point: `/boot`) |
+| **P3** | Rest | `8309` | **LUKS/LVM Container** |
 
 ---
 
@@ -122,6 +121,12 @@ Target Disk: `/dev/sda`
     grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck
     ```
 
+    **Install GRUB (Legacy BIOS/CSM):**
+    ```bash
+    grub-install /dev/sda
+    ```
+    
+
 4.  **Generate Configuration:**
     ```bash
     grub-mkconfig -o /boot/grub/grub.cfg
@@ -165,9 +170,8 @@ Target Disk: `/dev/sda`
 | Partition | Size | Type Code | Purpose |
 | :--- | :--- | :--- | :--- |
 | **P1** | 5MB | `ef02` | **BIOS Boot** (if you use GPT instead of MBR) |
-| **P2** | 500MB | `ef00` | **EFI System Partition (ESP)** (Mount point: `/boot/efi`) |
-| **P3** | 1GB | `8300` | **Boot Partition** (Mount point: `/boot`) |
-| **P4** | Rest | `8309` | **LUKS/LVM Container** |
+| **P2** | 1GB | `8300` | **Boot Partition** (Mount point: `/boot`) |
+| **P3** | Rest | `8309` | **LUKS/LVM Container** |
 
 ---
 
@@ -288,8 +292,14 @@ Target Disk: `/dev/sda`
     ```bash
     grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck
     ```
+ 
+    **Install GRUB (Legacy BIOS/CSM):**
+    ```bash
+    grub-install /dev/sda
+    ```
+       
 
-4.  **Generate Configuration:**
+5.  **Generate Configuration:**
     ```bash
     grub-mkconfig -o /boot/grub/grub.cfg
     ```
