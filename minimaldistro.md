@@ -1,4 +1,4 @@
-## 🐧 Minimal Linux Distro Build Guide: Sequential Summary
+## 🐧 Minimal Linux Distro Build Guide
 
 This guide details the steps to compile a custom Linux kernel and BusyBox userspace into a minimal, bootable disk image. The build environment is isolated using Docker, and the final image is tested with QEMU.
 
@@ -34,7 +34,7 @@ This section compiles the Linux kernel and prepares the `bzImage` file.
 
 1.  **Get Source:** Clones the latest kernel source and enters the directory.
     ```bash
-    git clone --depth one [https://github.com/torvalds/linux.git](https://github.com/torvalds/linux.git) && cd linux
+    git clone --depth one https://github.com/torvalds/linux.git && cd linux
     ```
 2.  **Configure:** **ACTION:** Use the menu to configure the kernel. Ensure the **64-bit kernel** option is selected. Exit and Save.
     ```bash
@@ -61,7 +61,7 @@ This creates the minimal root filesystem and the initial ramdisk image (`init.cp
 
 1.  **Get BusyBox Source:** Clones the source code and enters the directory.
     ```bash
-    git clone --depth one [https://git.busybox.net/busybox](https://git.busybox.net/busybox) && cd busybox
+    git clone --depth 1 https://git.busybox.net/busybox && cd busybox
     ```
 2.  **Configure:** **ACTION:** Use the menu to configure BusyBox. Navigate to **Settings -> Build static binary** and **enable it**. Exit and Save.
     ```bash
