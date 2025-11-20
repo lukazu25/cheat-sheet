@@ -11,3 +11,5 @@
 - [Fixing The Keyboard Backlight Issue On MATE](mate-backlight.md)
 
 - [LVM On LUKS Installation Guide](luks-lvm.md)
+
+- [How To Build The Minimal Linux Distro](minimaldistro.md)
