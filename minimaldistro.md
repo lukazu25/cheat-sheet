@@ -43,8 +43,7 @@ This guide details the steps to compile a custom Linux kernel and BusyBox usersp
 | **DOCKER** | `make install CONFIG_PREFIX=../boot_files/initramfs` | Installs compiled BusyBox utilities into the ramdisk structure. |
 | **DOCKER** | `cd ../boot_files/initramfs` | Moves into the initramfs structure. |
 | **DOCKER** | `vim init` | Creates the mandatory **init** script. |
-| **DOCKER** | **Init File Content:**<br>```#!/bin/sh exec 
-                                            /bin/sh``` | This script launches a shell immediately upon execution. |
+| **DOCKER** | **Init File Content:**<br>```#!/bin/sh exec /bin/sh``` | This script launches a shell immediately upon execution. |
 | **DOCKER** | `chmod +x init` | Makes the script executable. |
 | **DOCKER** | `find . | cpio -o -H newc > ../init.cpio` | Creates the final compressed ramdisk file (`init.cpio`). |
 | **DOCKER** | `cd ..` | Moves back up to `boot_files`. |
