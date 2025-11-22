@@ -138,7 +138,7 @@ This combines the kernel and ramdisk into a 50MB bootable FAT image using Syslin
 
 If successful, the kernel will boot, and you will be dropped into the minimal **BusyBox shell!**
 
-# 🛠️ Guide: Making Linux Distro with Buildroot
+# 🛠️ Making Linux Distro with Buildroot
 
 This guide contains the commands and steps used to create a simple Linux system for embedded purposes using the Buildroot tool.
 
@@ -230,7 +230,7 @@ This guide contains the commands and steps used to create a simple Linux system 
 
 ---
 
-## 5. 🖥️ Testing with QEMU 🚀
+## 5. 🖥️ Testing with QEMU 
 
 1.  **Boot with QEMU:**
     ```bash
