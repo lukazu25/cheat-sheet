@@ -178,7 +178,7 @@ This guide contains the commands and steps used to create a simple Linux system 
     * Exit and **Save** the new configuration.
 3.  **Compile System:** Starts the entire build process.
     ```bash
-    make
+    make -j$(nproc)
     ```
 
 ---
@@ -212,7 +212,7 @@ This guide contains the commands and steps used to create a simple Linux system 
     ```
 2.  **Format Filesystem:**
     ```bash
-    sudo mkfs.ext4 boot.img 
+    mkfs boot.img 
     ```
 3.  **Mount and Install Bootloader:**
     ```bash
@@ -239,7 +239,7 @@ This guide contains the commands and steps used to create a simple Linux system 
 
 2.  **Load Kernel & Root Device (At the 'boot:' prompt):**
     ```
-    bzImage root=/dev/sda
+    /bzImage root=/dev/sda
     ```
     (Log in as **`root`** when the system finishes booting.)
     
