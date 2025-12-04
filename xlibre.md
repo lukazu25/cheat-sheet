@@ -183,30 +183,7 @@ sudo ninja install
 
 ---
 
-## 3. Compile and Install AMD Driver (xf86-video-amdgpu)
-
-### 1. Clone the driver
-```bash
-cd ..
-git clone https://github.com/X11Libre/xf86-video-amdgpu.git
-cd xf86-video-amdgpu
-```
-
-### 2. Configure
-```bash
-./autogen.sh
-./configure --prefix=/usr
-```
-
-### 3. Build & install
-```bash
-make -j$(nproc)
-sudo make install
-```
-
----
-
-## 4. Compile and Install Input Driver (xf86-input-libinput)
+## 3. Compile and Install Input Driver (xf86-input-libinput)
 
 ### 1. Clone the driver
 ```bash
@@ -238,6 +215,27 @@ meson setup .. --prefix=/usr
 ```bash
 ninja -j$(nproc)
 sudo ninja install
+```
+
+## 4. Compile and Install AMD Driver (xf86-video-amdgpu)
+
+### 1. Clone the driver
+```bash
+cd ..
+git clone https://github.com/X11Libre/xf86-video-amdgpu.git
+cd xf86-video-amdgpu
+```
+
+### 2. Configure
+```bash
+./autogen.sh
+./configure --prefix=/usr
+```
+
+### 3. Build & install
+```bash
+make -j$(nproc)
+sudo make install
 ```
 
 ---
