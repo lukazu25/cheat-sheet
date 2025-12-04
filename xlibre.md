@@ -217,6 +217,8 @@ ninja -j$(nproc)
 sudo ninja install
 ```
 
+---
+
 ## 4. Compile and Install AMD Driver (xf86-video-amdgpu)
 
 ### 1. Clone the driver
