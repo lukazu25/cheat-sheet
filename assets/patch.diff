@@ -1,0 +1,59 @@
+This patch handles the case where the LUKS encrypted root partition was
+unlocked by GRUB, allowing to load the kernel and initrd.
+In this case GRUB set root to /dev/mapper/cryptroot in the command line.
+
+If the intrd tree includes a LUKS keyfile use it, else we should set CRYPTDEV
+to $(basename $root) so that ROOTDEV be /dev/mapper$CRYPTDEV in the mount
+command.
+Didier Spaier
+
+--- init	2018-04-18 20:55:09.661574000 +0200
++++ init.new	2021-02-11 00:37:33.753687578 +0100
+@@ -76,7 +76,12 @@
+ INITRD=$(cat /initrd-name)
+ ROOTDEV=$(cat /rootdev)
+ ROOTFS=$(cat /rootfs)
+-LUKSDEV=$(cat /luksdev)
++if grep -q : luksdev; then
++  LUKSDEV=$(cat /luksdev|cut -d: -f1)
++  LUKSNAME=$(cat /luksdev|cut -d: -f2)
++else
++  LUKSDEV=$(cat /luksdev)
++fi
+ LUKSTRIM=$(cat /lukstrim 2>/dev/null)
+ LUKSKEY=$(cat /lukskey)
+ RESUMEDEV=$(cat /resumedev)
+@@ -193,8 +198,9 @@
+   # partitions or mdadm arrays.
+   # Unavailable devices such as LVM Logical Volumes will need to be
+   # deferred until they become available after the vgscan.
+-
+-  if [ -x /sbin/cryptsetup ]; then
++  
++  [ "$LUKSKEY" ] && ! echo "$LUKSKEY" |grep -q "^/dev" && KEYININITRD="y"
++  if [ -x /sbin/cryptsetup ] && [ ! "$KEYININITRD" ] ; then
+ 
+     # Determine if we have to use a LUKS keyfile:
+     if [ ! -z "$LUKSKEY" ]; then
+@@ -229,6 +235,8 @@
+           CRYPTDEV="luks$(basename $LUKSDEV)"
+         elif [ "x$ROOTDEV" = "x$(basename $ROOTDEV)" ]; then
+           CRYPTDEV="$ROOTDEV"
++        elif echo $ROOTDEV | grep -q "^/dev/mapper/"; then
++          CRYPTDEV=$(basename $ROOTDEV)
+         else
+           CRYPTDEV="luks$(basename $LUKSDEV)"
+         fi
+@@ -252,6 +260,12 @@
+     done
+   fi
+ 
++  if [ -x /sbin/cryptsetup ] && [ "$KEYININITRD" ] ; then
++    [ ! "$LUKSNAME" ] && LUKSNAME=cryptroot
++    echo "Unlocking the root partition."
++    cryptsetup open --key-file "$LUKSKEY" "$LUKSDEV" "$LUKSNAME"
++  fi 
++
+   # Initialize LVM:
+   if [ -x /sbin/vgchange ]; then
+     mkdir -p /var/lock/lvm	# this avoids useless warnings
